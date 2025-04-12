@@ -290,5 +290,9 @@ pub mod pallet {
                 None
             }
         }
+
+        pub fn say_hello() -> &'static str {
+            "Hello from Risk Ratings Pallet!"
+        }
     }
 }
