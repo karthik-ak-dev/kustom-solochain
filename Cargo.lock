@@ -2246,7 +2246,7 @@ dependencies = [
  "sp-runtime",
  "sp-staking",
  "sp-state-machine",
- "sp-std",
+ "sp-std 14.0.0",
  "sp-tracing",
  "sp-weights",
  "static_assertions",
@@ -2313,7 +2313,7 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-runtime",
- "sp-std",
+ "sp-std 14.0.0",
  "sp-version",
  "sp-weights",
 ]
@@ -5030,6 +5030,7 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-runtime",
+ "sp-std 8.0.0",
 ]
 
 [[package]]
@@ -7378,7 +7379,7 @@ dependencies = [
  "sp-core",
  "sp-crypto-hashing",
  "sp-io",
- "sp-std",
+ "sp-std 14.0.0",
 ]
 
 [[package]]
@@ -8119,7 +8120,7 @@ dependencies = [
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-std",
+ "sp-std 14.0.0",
  "static_assertions",
 ]
 
@@ -8254,7 +8255,7 @@ dependencies = [
  "sp-debug-derive",
  "sp-externalities",
  "sp-runtime-interface",
- "sp-std",
+ "sp-std 14.0.0",
  "sp-storage",
  "ss58-registry",
  "substrate-bip39",
@@ -8486,7 +8487,7 @@ dependencies = [
  "sp-arithmetic",
  "sp-core",
  "sp-io",
- "sp-std",
+ "sp-std 14.0.0",
  "sp-weights",
  "tracing",
 ]
@@ -8504,7 +8505,7 @@ dependencies = [
  "primitive-types",
  "sp-externalities",
  "sp-runtime-interface-proc-macro",
- "sp-std",
+ "sp-std 14.0.0",
  "sp-storage",
  "sp-tracing",
  "sp-wasm-interface",
@@ -8599,6 +8600,12 @@ dependencies = [
  "thiserror",
  "x25519-dalek",
 ]
+
+[[package]]
+name = "sp-std"
+version = "8.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "53458e3c57df53698b3401ec0934bea8e8cfce034816873c0b0abbd83d7bac0d"
 
 [[package]]
 name = "sp-std"
@@ -8706,7 +8713,7 @@ dependencies = [
  "serde",
  "sp-crypto-hashing-proc-macro",
  "sp-runtime",
- "sp-std",
+ "sp-std 14.0.0",
  "sp-version-proc-macro",
  "thiserror",
 ]
