@@ -1,34 +1,26 @@
-//! # Todo List Pallet
+//! # Risk Ratings Pallet
 //!
-//! A simple todo list pallet that demonstrates the essential components of
-//! writing a FRAME pallet. This pallet allows users to create, complete, and delete todo items.
+//! A FRAME pallet for managing asset risk ratings and scores. This pallet allows:
+//! - Creating and managing assets
+//! - Adding risk scores to assets
+//! - Querying asset information and scores
 //!
 //! ## Overview
 //!
-//! This pallet implements basic todo list functionality:
-//! - Creating new todo items
-//! - Marking todo items as complete
-//! - Deleting todo items
-//! - Storing todo items with their completion status
-//! - Emitting events for todo operations
-//! - Handling errors for invalid operations
+//! The pallet implements a risk rating system where:
+//! 1. Assets can be created with basic information
+//! 2. Risk scores can be added to assets over time
+//! 3. Historical scores are maintained for analysis
 //!
-//! ## Technical Details
+//! ## Storage
+//! - Assets: Map of asset IDs to Asset structs
+//! - AssetScores: Map of asset IDs to their historical scores
+//! - NextAssetId: Counter for generating unique asset IDs
 //!
-//! ### Storage
-//! - Uses a StorageMap to store todos with u32 keys
-//! - Uses a StorageValue to maintain the next available todo ID
-//!
-//! ### Security
-//! - Only the owner of a todo can modify or delete it
-//! - Title length is bounded to prevent storage abuse
-//! - ID counter checks for overflow
-//!
-//! ### Events
-//! Emits events for:
-//! - Todo creation
-//! - Todo completion
-//! - Todo deletion
+//! ## Extrinsics
+//! - create_asset: Create a new asset
+//! - remove_asset: Remove an existing asset
+//! - add_score: Add a risk score to an asset
 
 #![cfg_attr(not(feature = "std"), no_std)]
 
@@ -42,26 +34,46 @@ pub mod pallet {
     use super::*;
     use frame_support::pallet_prelude::*;
     use frame_system::pallet_prelude::*;
-    use sp_std::prelude::*; // This brings Vec into scope
+    use sp_runtime::traits::SaturatedConversion;
+    use sp_std::prelude::*;
 
-    /// Struct representing a single todo item
-    ///
-    /// Properties:
-    /// - title: The todo item's text (bounded to 100 bytes for storage efficiency)
-    /// - completed: Boolean flag indicating if the todo is done
-    /// - owner: The account that created this todo
+    /// Struct representing an asset in the system
+    /// This is the main data structure stored in the Assets storage map
     #[derive(Clone, Encode, Decode, PartialEq, RuntimeDebug, TypeInfo, MaxEncodedLen)]
-    pub struct Todo<AccountId> {
-        /// The title of the todo item, limited to 100 bytes
-        pub title: BoundedVec<u8, ConstU32<100>>,
-        /// Whether the todo is completed
-        pub completed: bool,
-        /// The account that owns this todo
-        pub owner: AccountId,
+    pub struct Asset<AccountId> {
+        /// Unique identifier for the asset
+        pub id: u32,
+        /// Name of the asset (bounded to prevent storage abuse)
+        pub name: BoundedVec<u8, ConstU32<100>>,
+        /// Symbol/ticker of the asset (bounded to prevent storage abuse)
+        pub symbol: BoundedVec<u8, ConstU32<10>>,
+        /// Description of the asset (bounded to prevent storage abuse)
+        pub description: BoundedVec<u8, ConstU32<500>>,
+        /// The account that created this asset
+        pub creator: AccountId,
+        /// Timestamp when the asset was created (block number)
+        pub created_at: u32,
     }
 
+    /// Struct representing a single risk score entry for an asset
+    /// This is stored in the AssetScores storage map
+    #[derive(Clone, Encode, Decode, PartialEq, RuntimeDebug, TypeInfo, MaxEncodedLen)]
+    pub struct ScoreEntry {
+        /// The risk score value
+        pub score: u32,
+        /// Block number when the score was recorded
+        pub timestamp: u32,
+        /// Additional metadata about the score (bounded to prevent storage abuse)
+        pub metadata: BoundedVec<u8, ConstU32<200>>,
+    }
+
+    /// Bounded vector of score entries with a maximum length
+    /// This is used to limit the number of scores stored per asset
+    #[derive(Clone, Encode, Decode, PartialEq, RuntimeDebug, TypeInfo, MaxEncodedLen)]
+    pub struct BoundedScoreEntries(pub BoundedVec<ScoreEntry, ConstU32<1000>>);
+
     /// The pallet's configuration trait
-    /// This is where we declare types and constants that the pallet depends on.
+    /// This is where we declare types and constants that the pallet depends on
     #[pallet::pallet]
     pub struct Pallet<T>(_);
 
@@ -73,163 +85,210 @@ pub mod pallet {
         type WeightInfo: WeightInfo;
     }
 
-    /// Main storage for todos
-    ///
-    /// This is a mapping from todo ID (u32) to Todo struct.
-    /// We use Blake2_128Concat as the hasher for good performance and security.
+    /// Storage for all assets
+    /// Uses Blake2_128Concat hasher for efficient key-value storage
     #[pallet::storage]
-    pub type Todos<T: Config> = StorageMap<
-        _,                  // Prefix (automatically set by the system)
-        Blake2_128Concat,   // Hasher
-        u32,                // Key (todo ID)
-        Todo<T::AccountId>, // Value (todo struct)
-    >;
+    pub type Assets<T: Config> = StorageMap<_, Blake2_128Concat, u32, Asset<T::AccountId>>;
 
-    /// Counter for generating unique todo IDs
-    ///
-    /// This value automatically starts at 0 thanks to ValueQuery
-    /// and is incremented each time a new todo is created.
+    /// Counter for generating unique asset IDs
+    /// Starts at 0 and increments for each new asset
     #[pallet::storage]
-    pub type NextTodoId<T> = StorageValue<_, u32, ValueQuery>;
+    pub type NextAssetId<T> = StorageValue<_, u32, ValueQuery>;
+
+    /// Storage for asset scores (time series data)
+    /// Maps asset IDs to their historical scores
+    #[pallet::storage]
+    pub type AssetScores<T> = StorageMap<_, Blake2_128Concat, u32, BoundedScoreEntries>;
 
     /// Events emitted by this pallet
-    ///
-    /// Events help external entities (like apps) track what happened in the chain.
-    /// Each event includes the account that triggered it and relevant data.
+    /// These help external entities track what happened in the chain
     #[pallet::event]
     #[pallet::generate_deposit(pub(super) fn deposit_event)]
     pub enum Event<T: Config> {
-        /// Emitted when a new todo is created
-        /// Parameters: [todo_id, creator_account]
-        TodoCreated { todo_id: u32, who: T::AccountId },
-        /// Emitted when a todo is marked complete
-        /// Parameters: [todo_id, completer_account]
-        TodoCompleted { todo_id: u32, who: T::AccountId },
-        /// Emitted when a todo is deleted
-        /// Parameters: [todo_id, deleter_account]
-        TodoDeleted { todo_id: u32, who: T::AccountId },
+        /// Emitted when a new asset is created
+        AssetCreated {
+            asset_id: u32,
+            creator: T::AccountId,
+        },
+        /// Emitted when an asset is removed
+        AssetRemoved {
+            asset_id: u32,
+            remover: T::AccountId,
+        },
+        /// Emitted when a new score is added for an asset
+        ScoreAdded {
+            asset_id: u32,
+            score: u32,
+            timestamp: u32,
+        },
     }
 
     /// Custom errors that can occur in this pallet
     #[pallet::error]
     pub enum Error<T> {
-        /// Returned when trying to modify a non-existent todo
-        TodoNotFound,
-        /// Returned when someone tries to modify a todo they don't own
-        NotTodoOwner,
-        /// Returned when the todo title exceeds 100 bytes
-        TitleTooLong,
-        /// Returned if we've reached the maximum number of todos (u32::MAX)
-        TodoIdOverflow,
+        /// Asset not found in storage
+        AssetNotFound,
+        /// Not authorized to perform the action
+        NotAuthorized,
+        /// Asset name exceeds maximum length
+        NameTooLong,
+        /// Asset symbol exceeds maximum length
+        SymbolTooLong,
+        /// Asset description exceeds maximum length
+        DescriptionTooLong,
+        /// Score metadata exceeds maximum length
+        MetadataTooLong,
+        /// Maximum number of assets reached (u32 overflow)
+        AssetIdOverflow,
+        /// Maximum number of scores reached for an asset
+        MaxScoresReached,
     }
 
     /// Dispatchable functions (callable extrinsics)
     /// These are the functions that users can call to interact with the pallet
     #[pallet::call]
     impl<T: Config> Pallet<T> {
-        /// Creates a new todo item
-        ///
-        /// Parameters:
-        /// - origin: The call origin (must be signed)
-        /// - title: The title of the todo item
-        ///
-        /// Flow:
-        /// 1. Verify the caller
-        /// 2. Convert title to bounded vector
-        /// 3. Generate new todo ID
-        /// 4. Create and store todo
-        /// 5. Emit event
+        /// Create a new asset
+        /// This is an extrinsic that can be called by any signed account
         #[pallet::call_index(0)]
         #[pallet::weight(T::WeightInfo::do_something())]
-        pub fn create_todo(origin: OriginFor<T>, title: Vec<u8>) -> DispatchResult {
-            // Ensure the call is signed and get the signer's account
-            let who = ensure_signed(origin)?;
+        pub fn create_asset(
+            origin: OriginFor<T>,
+            name: Vec<u8>,
+            symbol: Vec<u8>,
+            description: Vec<u8>,
+        ) -> DispatchResult {
+            // Verify the caller is a signed account
+            let creator = ensure_signed(origin)?;
 
-            // Convert the title to a bounded vector, ensuring it's not too long
-            let bounded_title = BoundedVec::<u8, ConstU32<100>>::try_from(title)
-                .map_err(|_| Error::<T>::TitleTooLong)?;
+            // Convert inputs to bounded vectors to prevent storage abuse
+            let bounded_name = BoundedVec::<u8, ConstU32<100>>::try_from(name)
+                .map_err(|_| Error::<T>::NameTooLong)?;
+            let bounded_symbol = BoundedVec::<u8, ConstU32<10>>::try_from(symbol)
+                .map_err(|_| Error::<T>::SymbolTooLong)?;
+            let bounded_description = BoundedVec::<u8, ConstU32<500>>::try_from(description)
+                .map_err(|_| Error::<T>::DescriptionTooLong)?;
 
-            // Get the next todo ID and increment it
-            let todo_id = NextTodoId::<T>::get();
-            let next_todo_id = todo_id.checked_add(1).ok_or(Error::<T>::TodoIdOverflow)?;
+            // Get and increment the next asset ID
+            let asset_id = NextAssetId::<T>::get();
+            let next_asset_id = asset_id.checked_add(1).ok_or(Error::<T>::AssetIdOverflow)?;
 
-            // Create the new todo item
-            let todo = Todo {
-                title: bounded_title,
-                completed: false,
-                owner: who.clone(),
+            // Create the new asset
+            let asset = Asset {
+                id: asset_id,
+                name: bounded_name,
+                symbol: bounded_symbol,
+                description: bounded_description,
+                creator: creator.clone(),
+                created_at: frame_system::Pallet::<T>::block_number().saturated_into::<u32>(),
             };
 
-            // Store the todo in chain storage
-            Todos::<T>::insert(todo_id, todo);
-            NextTodoId::<T>::put(next_todo_id);
+            // Store the asset
+            Assets::<T>::insert(asset_id, asset);
+            NextAssetId::<T>::put(next_asset_id);
 
-            // Emit the creation event
-            Self::deposit_event(Event::TodoCreated { todo_id, who });
+            // Initialize empty scores vector
+            AssetScores::<T>::insert(asset_id, BoundedScoreEntries(BoundedVec::new()));
+
+            // Emit event
+            Self::deposit_event(Event::AssetCreated { asset_id, creator });
 
             Ok(())
         }
 
-        /// Marks a todo as complete
-        ///
-        /// Parameters:
-        /// - origin: The call origin (must be signed)
-        /// - todo_id: The ID of the todo to complete
-        ///
-        /// Flow:
-        /// 1. Verify the caller
-        /// 2. Find and verify todo ownership
-        /// 3. Update completion status
-        /// 4. Emit event
+        /// Remove an asset
+        /// This is an extrinsic that can only be called by the asset creator
         #[pallet::call_index(1)]
         #[pallet::weight(T::WeightInfo::do_something())]
-        pub fn complete_todo(origin: OriginFor<T>, todo_id: u32) -> DispatchResult {
+        pub fn remove_asset(origin: OriginFor<T>, asset_id: u32) -> DispatchResult {
+            // Verify the caller is a signed account
             let who = ensure_signed(origin)?;
 
-            // try_mutate allows us to modify storage in a closure
-            Todos::<T>::try_mutate(todo_id, |maybe_todo| -> DispatchResult {
-                // Get a mutable reference to the todo or return TodoNotFound
-                let todo = maybe_todo.as_mut().ok_or(Error::<T>::TodoNotFound)?;
+            // Get the asset and verify ownership
+            let asset = Assets::<T>::get(asset_id).ok_or(Error::<T>::AssetNotFound)?;
+            ensure!(asset.creator == who, Error::<T>::NotAuthorized);
 
-                // Verify ownership
-                ensure!(todo.owner == who, Error::<T>::NotTodoOwner);
+            // Remove the asset and its scores
+            Assets::<T>::remove(asset_id);
+            AssetScores::<T>::remove(asset_id);
 
-                // Mark as complete
-                todo.completed = true;
-
-                // Emit completion event
-                Self::deposit_event(Event::TodoCompleted { todo_id, who });
-                Ok(())
-            })
-        }
-
-        /// Deletes a todo item
-        ///
-        /// Parameters:
-        /// - origin: The call origin (must be signed)
-        /// - todo_id: The ID of the todo to delete
-        ///
-        /// Flow:
-        /// 1. Verify the caller
-        /// 2. Check todo exists and verify ownership
-        /// 3. Remove from storage
-        /// 4. Emit event
-        #[pallet::call_index(2)]
-        #[pallet::weight(T::WeightInfo::do_something())]
-        pub fn delete_todo(origin: OriginFor<T>, todo_id: u32) -> DispatchResult {
-            let who = ensure_signed(origin)?;
-
-            // Get the todo and verify ownership
-            let todo = Todos::<T>::get(todo_id).ok_or(Error::<T>::TodoNotFound)?;
-            ensure!(todo.owner == who, Error::<T>::NotTodoOwner);
-
-            // Remove the todo from storage
-            Todos::<T>::remove(todo_id);
-
-            // Emit deletion event
-            Self::deposit_event(Event::TodoDeleted { todo_id, who });
+            Self::deposit_event(Event::AssetRemoved {
+                asset_id,
+                remover: who,
+            });
 
             Ok(())
+        }
+
+        /// Add a new score for an asset
+        /// This is an extrinsic that can be called by any signed account
+        #[pallet::call_index(2)]
+        #[pallet::weight(T::WeightInfo::do_something())]
+        pub fn add_score(
+            origin: OriginFor<T>,
+            asset_id: u32,
+            score: u32,
+            metadata: Vec<u8>,
+        ) -> DispatchResult {
+            // Verify the caller is a signed account
+            ensure_signed(origin)?;
+
+            // Verify asset exists
+            ensure!(
+                Assets::<T>::contains_key(asset_id),
+                Error::<T>::AssetNotFound
+            );
+
+            // Convert metadata to bounded vector
+            let bounded_metadata = BoundedVec::<u8, ConstU32<200>>::try_from(metadata)
+                .map_err(|_| Error::<T>::MetadataTooLong)?;
+
+            // Create new score entry
+            let score_entry = ScoreEntry {
+                score,
+                timestamp: frame_system::Pallet::<T>::block_number().saturated_into::<u32>(),
+                metadata: bounded_metadata,
+            };
+
+            // Update scores storage
+            AssetScores::<T>::try_mutate(asset_id, |scores| -> DispatchResult {
+                let bounded_scores = scores.as_mut().ok_or(Error::<T>::AssetNotFound)?;
+                bounded_scores
+                    .0
+                    .try_push(score_entry)
+                    .map_err(|_| Error::<T>::MaxScoresReached)?;
+                Ok(())
+            })?;
+
+            Self::deposit_event(Event::ScoreAdded {
+                asset_id,
+                score,
+                timestamp: frame_system::Pallet::<T>::block_number().saturated_into::<u32>(),
+            });
+
+            Ok(())
+        }
+    }
+
+    /// Internal implementation of helper functions
+    impl<T: Config> Pallet<T> {
+        /// Get all assets from storage
+        pub fn get_all_assets() -> Vec<(u32, Asset<T::AccountId>)> {
+            Assets::<T>::iter().collect()
+        }
+
+        /// Get a specific asset by ID
+        pub fn get_asset(asset_id: u32) -> Option<Asset<T::AccountId>> {
+            Assets::<T>::get(asset_id)
+        }
+
+        /// Get all scores for an asset
+        pub fn get_asset_scores(asset_id: u32) -> Option<Vec<ScoreEntry>> {
+            if let Some(scores) = AssetScores::<T>::get(asset_id) {
+                Some(scores.0.into_inner().into_iter().collect())
+            } else {
+                None
+            }
         }
     }
 }
