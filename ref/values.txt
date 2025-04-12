@@ -29,6 +29,23 @@ Account ID:        0x045885cbad88ff2539e9371833ec3ca2bd114bfdfdd34c869798e32340c
 Public key (SS58): 5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9
 SS58 Address:      5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9
 
+
+"5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8",
+"5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3",
+"5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9"
+
+[
+    "5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8",
+    1152921504606846976
+],
+[
+    "5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3",
+    1152921504606846976
+],
+[
+    "5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9",
+    1152921504606846976
+]
 <=========== Aura Values for nodes ============>:
 
 
@@ -64,3 +81,16 @@ Public key (hex):  0x4b9667a0603960b40d17590c29ecc28bbc46614ba1246db45d2bd3b8b08
 Account ID:        0x4b9667a0603960b40d17590c29ecc28bbc46614ba1246db45d2bd3b8b0852f5f
 Public key (SS58): 5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT
 SS58 Address:      5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT
+
+[
+    "5DqQzX96dG7ycueJxapQKXbJjhHneWF7imkykbMUc3EDQyEe",
+    1
+],
+[
+    "5Eodfn2ntEUCttJgKQfBrLcvbXBYx9eiVmiLtevV4zterNar",
+    1
+],
+[
+    "5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT",
+    1
+]

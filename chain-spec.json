@@ -3,7 +3,7 @@
   "id": "local_testnet",
   "chainType": "Local",
   "bootNodes": [
-    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWCpL11j4ENrchUc2nxLvH7LxNDdfZQsHF6iMcXGiqEgZ2"
+    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWHe4pCmqVSTR31F93AdvdXSUxJipZbXmyAkz68moVMFYd"
   ],
   "telemetryEndpoints": null,
   "protocolId": null,
@@ -69,24 +69,39 @@
             [
               "5CRmqmsiNFExV6VbdmPJViVxrWmkaXXvBrSX8oqBT8R9vmWk",
               1152921504606846976
+            ],
+            
+
+            
+            [
+                "5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8",
+                1152921504606846976
+            ],
+            [
+                "5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3",
+                1152921504606846976
+            ],
+            [
+                "5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9",
+                1152921504606846976
             ]
           ]
         },
         "grandpa": {
           "authorities": [
             [
-              "5DqQzX96dG7ycueJxapQKXbJjhHneWF7imkykbMUc3EDQyEe",
-              1
+                "5DqQzX96dG7ycueJxapQKXbJjhHneWF7imkykbMUc3EDQyEe",
+                1
             ],
             [
-              "5Eodfn2ntEUCttJgKQfBrLcvbXBYx9eiVmiLtevV4zterNar",
-              1
+                "5Eodfn2ntEUCttJgKQfBrLcvbXBYx9eiVmiLtevV4zterNar",
+                1
             ],
             [
-              "5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT",
-              1
+                "5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT",
+                1
             ]
-          ] 
+          ]
         },
         "sudo": {
           "key": "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY"
