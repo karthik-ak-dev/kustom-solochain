@@ -39,6 +39,16 @@ pub mod pallet {
     use frame_system::pallet_prelude::*;
     use sp_runtime::traits::SaturatedConversion;
     use sp_std::prelude::*;
+    
+    // Import necessary std-like types for no_std environment
+    #[cfg(feature = "std")]
+    use std::string::String;
+    #[cfg(feature = "std")]
+    use std::format;
+    #[cfg(not(feature = "std"))]
+    use scale_info::prelude::string::String;
+    #[cfg(not(feature = "std"))]
+    use scale_info::prelude::format;
 
     /// Struct representing an asset in the system
     /// This is the main data structure stored in the Assets storage map
@@ -275,6 +285,72 @@ pub mod pallet {
 
     /// Internal implementation of helper functions
     impl<T: Config> Pallet<T> {
+        /// Format a single asset as a JSON string
+        fn format_asset_as_json(asset: &Asset<T::AccountId>) -> String {
+            // Create a JSON-formatted string
+            let name = String::from_utf8_lossy(&asset.name[..]);
+            let symbol = String::from_utf8_lossy(&asset.symbol[..]);
+            let description = String::from_utf8_lossy(&asset.description[..]);
+            
+            // Extract the SS58 address part from the debug representation
+            let creator_debug = format!("{:?}", asset.creator);
+            let creator_ss58 = if let Some(start) = creator_debug.rfind('(') {
+                if let Some(end) = creator_debug.rfind(')') {
+                    &creator_debug[start+1..end]
+                } else {
+                    &creator_debug
+                }
+            } else {
+                &creator_debug
+            };
+            
+            // Create a clean JSON string.
+            format!(
+                r#"{{"id": {}, "name": "{}", "symbol": "{}", "description": "{}", "creator": "{}", "createdAt": {}}}"#,
+                asset.id,
+                name,
+                symbol,
+                description,
+                creator_ss58,
+                asset.created_at
+            )
+        }
+        
+        /// Get asset as JSON-formatted bytes
+        pub fn get_asset_as_json_bytes(asset_id: u32) -> Option<Vec<u8>> {
+            if let Some(asset) = Self::get_asset(asset_id) {
+                let json = Self::format_asset_as_json(&asset);
+                // Option: Remove any stray non-printable characters at the beginning.
+                let cleaned = json.trim_start_matches('\u{feff}'); // removes BOM if present
+                Some(cleaned.as_bytes().to_vec())
+            } else {
+                None
+            }
+        }
+        
+        /// Get all assets as JSON-formatted bytes
+        pub fn get_all_assets_as_json_bytes() -> Vec<u8> {
+            let assets = Self::get_all_assets();
+            
+            // If no assets, return empty array
+            if assets.is_empty() {
+                return "[]".as_bytes().to_vec();
+            }
+            
+            // Format each asset as JSON
+            let mut json_assets = Vec::new();
+            for (_, asset) in assets {
+                json_assets.push(Self::format_asset_as_json(&asset));
+            }
+            
+            // Combine into a JSON array
+            let json_array = format!("[{}]", json_assets.join(","));
+            
+            // Remove any stray non-printable characters
+            let cleaned = json_array.trim_start_matches('\u{feff}');
+            cleaned.as_bytes().to_vec()
+        }
+
         /// Get all assets from storage
         pub fn get_all_assets() -> Vec<(u32, Asset<T::AccountId>)> {
             Assets::<T>::iter().collect()
@@ -295,7 +371,7 @@ pub mod pallet {
         }
 
         pub fn say_hello() -> Vec<u8> {
-            "Hello from Risk Ratings Pallet!".as_bytes().to_vec()
+            "Hi from Risk Ratings Pallet!".as_bytes().to_vec()
         }
     }
 }

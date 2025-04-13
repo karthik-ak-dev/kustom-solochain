@@ -608,5 +608,13 @@ impl_runtime_apis! {
         fn say_hello() -> Vec<u8> {
             RiskRatings::say_hello()
         }
+        
+        fn get_asset(asset_id: u32) -> Option<Vec<u8>> {
+            RiskRatings::get_asset_as_json_bytes(asset_id)
+        }
+        
+        fn get_all_assets() -> Vec<u8> {
+            RiskRatings::get_all_assets_as_json_bytes()
+        }
     }
 }

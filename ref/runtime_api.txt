@@ -5,3 +5,29 @@ curl -s -H "Content-Type: application/json" -d '{
   "method": "state_call",
   "params": ["RiskRatingApi_say_hello", "0x"]
 }' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | cut -c3- | xxd -r -p
+
+
+curl -s -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "state_call",
+  "params": ["RiskRatingApi_get_asset", "0x00000000"]
+}' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | xxd -r -p
+
+
+curl -s -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "state_call",
+  "params": ["RiskRatingApi_get_asset", "0x00000000"]
+}' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | xxd -r -p
+
+?{"id": 0, "name": "ff", "symbol": "ff", "description": "ff", "creator": "5GrwvaEF...", "createdAt": 8}%    
+
+curl -s -H "Content-Type: application/json" -d '{
+  "jsonrpc": "2.0",
+  "id": 1,
+  "method": "state_call",
+  "params": ["RiskRatingApi_get_all_assets", "0x"]
+}' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | xxd -r -p
+?[{"id": 0, "name": "ff", "symbol": "ff", "description": "ff", "creator": "5GrwvaEF...", "createdAt": 8}]%

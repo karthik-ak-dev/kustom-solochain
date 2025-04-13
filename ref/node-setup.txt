@@ -1,6 +1,6 @@
 Simply run as dev chain -- Single node setup:
 ./target/release/solochain-template-node --dev
-
+./target/release/solochain-template-node purge-chain --dev -y
 
 Local storage setup: 
 mkdir -p local-chain-state/{bootnode,validator1,validator2,validator3,lightnode}
