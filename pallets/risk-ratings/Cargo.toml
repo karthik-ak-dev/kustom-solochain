@@ -24,6 +24,7 @@ frame-support = { workspace = true }
 frame-system = { workspace = true }
 sp-std = { version = "8.0.0", default-features = false }
 sp-runtime = { workspace = true }
+sp-api = { workspace = true, default-features = false }
 
 [dev-dependencies]
 sp-core = { default-features = true, workspace = true }
@@ -40,6 +41,7 @@ std = [
 	"scale-info/std",
 	"sp-std/std",
 	"sp-runtime/std",
+	"sp-api/std",
 ]
 runtime-benchmarks = [
 	"frame-benchmarking/runtime-benchmarks",
@@ -50,3 +52,4 @@ try-runtime = [
 	"frame-support/try-runtime",
 	"frame-system/try-runtime",
 ]
+runtime-api = ["std"]

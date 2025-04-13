@@ -29,6 +29,12 @@ pub use pallet::*;
 pub mod weights;
 pub use weights::*;
 
+// Expose the runtime API module unconditionally, since the API itself will handle std/no_std
+// pub mod runtime_api;
+
+// // Re-export the API trait for convenience
+// pub use runtime_api::RiskRatingsApi;
+
 #[frame_support::pallet]
 pub mod pallet {
     use super::*;
@@ -291,6 +297,10 @@ pub mod pallet {
             }
         }
 
+        /// Returns a hello message from the Risk Ratings pallet
+        /// 
+        /// This is the internal implementation that returns a Rust string.
+        /// The runtime API uses this and converts it to Vec<u8> for cross-boundary compatibility.
         pub fn say_hello() -> &'static str {
             "Hello from Risk Ratings Pallet!"
         }

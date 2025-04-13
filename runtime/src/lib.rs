@@ -18,6 +18,7 @@ use sp_runtime::{
 #[cfg(feature = "std")]
 use sp_version::NativeVersion;
 use sp_version::RuntimeVersion;
+// use sp_std::prelude::*;
 
 pub use frame_support::{
     construct_runtime, derive_impl, parameter_types,
@@ -602,4 +603,14 @@ impl_runtime_apis! {
             vec![]
         }
     }
+
+    impl pallet_risk_ratings::RiskRatingsApi<Block> for Runtime {
+        fn say_hello() -> Vec<u8> {
+            // Get the &'static str from the pallet and convert it to Vec<u8>
+            // for compatibility with WASM runtime boundary
+            let message = pallet_risk_ratings::Pallet::<Runtime>::say_hello();
+            message.as_bytes().to_vec()
+        }
+    }
+
 }

@@ -2553,8 +2553,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c4567c8db10ae91089c99af84c68c38da3ec2f087c3f82960bcdbf3656b6f4d7"
 dependencies = [
  "cfg-if",
+ "js-sys",
  "libc",
  "wasi",
+ "wasm-bindgen",
 ]
 
 [[package]]
@@ -5027,6 +5029,7 @@ dependencies = [
  "frame-system",
  "parity-scale-codec",
  "scale-info",
+ "sp-api",
  "sp-core",
  "sp-io",
  "sp-runtime",
@@ -8031,6 +8034,7 @@ dependencies = [
  "frame-system-benchmarking",
  "frame-system-rpc-runtime-api",
  "frame-try-runtime",
+ "getrandom",
  "pallet-aura",
  "pallet-balances",
  "pallet-grandpa",
@@ -8051,6 +8055,7 @@ dependencies = [
  "sp-offchain",
  "sp-runtime",
  "sp-session",
+ "sp-std 11.0.0",
  "sp-storage",
  "sp-transaction-pool",
  "sp-version",
@@ -8606,6 +8611,12 @@ name = "sp-std"
 version = "8.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "53458e3c57df53698b3401ec0934bea8e8cfce034816873c0b0abbd83d7bac0d"
+
+[[package]]
+name = "sp-std"
+version = "11.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8c91d32e165d08a14098ce5ec923eaec59d1d0583758a18a770beec1b780b0d0"
 
 [[package]]
 name = "sp-std"

@@ -40,6 +40,7 @@ sp-offchain.workspace = true
 sp-runtime = { features = ["serde"], workspace = true }
 sp-session.workspace = true
 sp-storage.workspace = true
+sp-std = { version = "11.0.0", default-features = false }
 sp-transaction-pool.workspace = true
 sp-version = { features = ["serde"], workspace = true }
 sp-genesis-builder.workspace = true
@@ -48,7 +49,10 @@ pallet-transaction-payment-rpc-runtime-api.workspace = true
 frame-benchmarking = { optional = true, workspace = true }
 frame-system-benchmarking = { optional = true, workspace = true }
 # pallet-template.workspace = true
-pallet-risk-ratings.workspace = true
+pallet-risk-ratings = { workspace = true, features = ["runtime-api"] }
+
+# WebAssembly compatibility
+getrandom = { version = "0.2", features = ["js"] }
 
 [build-dependencies]
 substrate-wasm-builder = { optional = true, workspace = true, default-features = true }
@@ -74,6 +78,7 @@ std = [
 	"pallet-sudo/std",
 	# "pallet-template/std",
 	"pallet-risk-ratings/std",
+	"pallet-risk-ratings/runtime-api",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
@@ -88,6 +93,7 @@ std = [
 	"sp-offchain/std",
 	"sp-runtime/std",
 	"sp-session/std",
+	"sp-std/std",
 	"sp-storage/std",
 	"sp-transaction-pool/std",
 	"sp-version/std",
