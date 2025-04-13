@@ -602,4 +602,11 @@ impl_runtime_apis! {
             vec![]
         }
     }
+    
+    // #[cfg(feature = "std")]
+    impl pallet_risk_ratings::runtime_apis::RiskRatingApi<Block> for Runtime {
+        fn say_hello() -> Vec<u8> {
+            RiskRatings::say_hello()
+        }
+    }
 }

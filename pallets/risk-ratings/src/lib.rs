@@ -29,6 +29,9 @@ pub use pallet::*;
 pub mod weights;
 pub use weights::*;
 
+// #[cfg(feature = "std")]
+pub mod runtime_apis;
+
 #[frame_support::pallet]
 pub mod pallet {
     use super::*;
@@ -291,8 +294,8 @@ pub mod pallet {
             }
         }
 
-        pub fn say_hello() -> &'static str {
-            "Hello from Risk Ratings Pallet!"
+        pub fn say_hello() -> Vec<u8> {
+            "Hello from Risk Ratings Pallet!".as_bytes().to_vec()
         }
     }
 }
