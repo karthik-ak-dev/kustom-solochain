@@ -1,4 +1,6 @@
 .DS_Store
 
 target/
+
 local-chain-state/
+local-chain-state/*

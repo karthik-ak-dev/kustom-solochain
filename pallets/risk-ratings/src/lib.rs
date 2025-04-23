@@ -292,26 +292,32 @@ pub mod pallet {
             let symbol = String::from_utf8_lossy(&asset.symbol[..]);
             let description = String::from_utf8_lossy(&asset.description[..]);
             
-            // Extract the SS58 address part from the debug representation
+            // For the creator field, we need the SS58 address
+            // The debug representation typically includes the SS58 address in parentheses
+            // e.g., "d43593c715fdd31c61141abd04a99fd6822c8558854ccde39a5684e7a56da27d (5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY)"
             let creator_debug = format!("{:?}", asset.creator);
-            let creator_ss58 = if let Some(start) = creator_debug.rfind('(') {
-                if let Some(end) = creator_debug.rfind(')') {
-                    &creator_debug[start+1..end]
-                } else {
+            
+            // Extract the complete SS58 address if available
+            let creator_address = match (creator_debug.find('('), creator_debug.find(')')) {
+                (Some(start), Some(end)) if end > start => {
+                    // Extract content between parentheses - this should be the complete address
+                    // Remove leading space if present
+                    creator_debug[start+1..end].trim()
+                },
+                _ => {
+                    // If no parentheses or invalid format, use the full debug string
                     &creator_debug
                 }
-            } else {
-                &creator_debug
             };
             
-            // Create a clean JSON string.
+            // Create a clean JSON string
             format!(
                 r#"{{"id": {}, "name": "{}", "symbol": "{}", "description": "{}", "creator": "{}", "createdAt": {}}}"#,
                 asset.id,
                 name,
                 symbol,
                 description,
-                creator_ss58,
+                creator_address,
                 asset.created_at
             )
         }

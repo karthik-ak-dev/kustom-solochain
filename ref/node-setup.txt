@@ -6,15 +6,12 @@ Local storage setup:
 mkdir -p local-chain-state/{bootnode,validator1,validator2,validator3,lightnode}
 
 
-
 Generate p2p keys for the nodes:
 subkey generate-node-key > local-chain-state/bootnode/node-key
 subkey generate-node-key > local-chain-state/validator1/node-key
 subkey generate-node-key > local-chain-state/validator2/node-key
 subkey generate-node-key > local-chain-state/validator3/node-key
 subkey generate-node-key > local-chain-state/lightnode/node-key
-
-
 
 
 Authorities key gen for validators(Run for each node)
@@ -61,7 +58,7 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator1 \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWHe4pCmqVSTR31F93AdvdXSUxJipZbXmyAkz68moVMFYd"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
 
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
@@ -72,7 +69,7 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator2 \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWHe4pCmqVSTR31F93AdvdXSUxJipZbXmyAkz68moVMFYd"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
 
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
@@ -83,7 +80,7 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator3 \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWHe4pCmqVSTR31F93AdvdXSUxJipZbXmyAkz68moVMFYd"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
 
 Insert Aura & GRANDPA keys via RPC (For Validators)
 Node 1:
@@ -133,7 +130,7 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --rpc-port 9960 \
 --rpc-methods=Unsafe \
 --name LightNode \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWHe4pCmqVSTR31F93AdvdXSUxJipZbXmyAkz68moVMFYd"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
 
 
 
