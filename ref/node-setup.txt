@@ -36,14 +36,16 @@ Create chain spec raw:
 
 
 Boot node init:
-RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
---chain chain-spec-raw.json \
---base-path ./local-chain-state/bootnode \
---node-key-file ./local-chain-state/bootnode/node-key \
---port 30333 \
---rpc-port 9933 \
---rpc-methods=Unsafe \
---name BootNode
+./target/release/solochain-template-node \
+  --chain chain-spec-raw.json \
+  --base-path ./local-chain-state/bootnode \
+  --node-key-file ./local-chain-state/bootnode/node-key \
+  --listen-addr /ip4/0.0.0.0/tcp/30333 \
+  --public-addr /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp \
+  --rpc-port 9933 \
+  --rpc-methods=Safe \
+  --allow-private-ip \
+  --name BootNode
 
 
 
@@ -58,7 +60,8 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator1 \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
+--allow-private-ip \
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
 
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
@@ -69,7 +72,8 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator2 \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
+--allow-private-ip \
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
 
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
@@ -80,7 +84,8 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator3 \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
+--allow-private-ip \
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
 
 Insert Aura & GRANDPA keys via RPC (For Validators)
 Node 1:
@@ -130,7 +135,8 @@ RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --rpc-port 9960 \
 --rpc-methods=Unsafe \
 --name LightNode \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
+--allow-private-ip \
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
 
 
 
