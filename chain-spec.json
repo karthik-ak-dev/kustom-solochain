@@ -3,7 +3,7 @@
   "id": "xerberus",
   "chainType": "Live",
   "bootNodes": [
-    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
+    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri"
   ],
   "telemetryEndpoints": null,
   "protocolId": "xerberus",

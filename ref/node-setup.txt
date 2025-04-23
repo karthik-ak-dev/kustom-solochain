@@ -3,15 +3,15 @@ Simply run as dev chain -- Single node setup:
 ./target/release/solochain-template-node purge-chain --dev -y
 
 Local storage setup: 
-mkdir -p local-chain-state/{bootnode,validator1,validator2,validator3,lightnode}
+mkdir -p local-chain-state/{keys,data}/{bootnode,validator1,validator2,validator3,lightnode}
 
 
 Generate p2p keys for the nodes:
-subkey generate-node-key > local-chain-state/bootnode/node-key
-subkey generate-node-key > local-chain-state/validator1/node-key
-subkey generate-node-key > local-chain-state/validator2/node-key
-subkey generate-node-key > local-chain-state/validator3/node-key
-subkey generate-node-key > local-chain-state/lightnode/node-key
+subkey generate-node-key > local-chain-state/keys/bootnode/node-key
+subkey generate-node-key > local-chain-state/keys/validator1/node-key
+subkey generate-node-key > local-chain-state/keys/validator2/node-key
+subkey generate-node-key > local-chain-state/keys/validator3/node-key
+subkey generate-node-key > local-chain-state/keys/lightnode/node-key
 
 
 Authorities key gen for validators(Run for each node)
@@ -38,54 +38,52 @@ Create chain spec raw:
 Boot node init:
 ./target/release/solochain-template-node \
   --chain chain-spec-raw.json \
-  --base-path ./local-chain-state/bootnode \
-  --node-key-file ./local-chain-state/bootnode/node-key \
+  --base-path ./local-chain-state/data/bootnode \
+  --node-key-file ./local-chain-state/keys/bootnode/node-key \
   --listen-addr /ip4/0.0.0.0/tcp/30333 \
-  --public-addr /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp \
+  --public-addr /ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri \
   --rpc-port 9933 \
   --rpc-methods=Safe \
   --allow-private-ip \
   --name BootNode
 
 
-
-
 Run Validator nodes: 
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
---base-path ./local-chain-state/validator1 \
---node-key-file ./local-chain-state/validator1/node-key \
+--base-path ./local-chain-state/data/validator1 \
+--node-key-file ./local-chain-state/keys/validator1/node-key \
 --port 30334 \
 --rpc-port 9934 \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator1 \
 --allow-private-ip \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri"
 
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
---base-path ./local-chain-state/validator2 \
---node-key-file ./local-chain-state/validator2/node-key \
+--base-path ./local-chain-state/data/validator2 \
+--node-key-file ./local-chain-state/keys/validator2/node-key \
 --port 30335 \
 --rpc-port 9935 \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator2 \
 --allow-private-ip \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri"
 
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
---base-path ./local-chain-state/validator3 \
---node-key-file ./local-chain-state/validator3/node-key \
+--base-path ./local-chain-state/data/validator3 \
+--node-key-file ./local-chain-state/keys/validator3/node-key \
 --port 30336 \
 --rpc-port 9936 \
 --validator \
 --rpc-methods=Unsafe \
 --name Validator3 \
 --allow-private-ip \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri"
 
 Insert Aura & GRANDPA keys via RPC (For Validators)
 Node 1:
@@ -129,14 +127,14 @@ http://127.0.0.1:9936
 Run Light Node:
 RUST_LOG=afg=trace,grandpa=debug ./target/release/solochain-template-node \
 --chain chain-spec-raw.json \
---base-path ./local-chain-state/lightnode \
---node-key-file ./local-chain-state/lightnode/node-key \
+--base-path ./local-chain-state/data/lightnode \
+--node-key-file ./local-chain-state/keys/lightnode/node-key \
 --port 30400 \
 --rpc-port 9960 \
 --rpc-methods=Unsafe \
 --name LightNode \
 --allow-private-ip \
---bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
+--bootnodes "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri"
 
 
 
