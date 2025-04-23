@@ -1,13 +1,17 @@
 {
-  "name": "Local Testnet",
-  "id": "local_testnet",
-  "chainType": "Local",
+  "name": "Xerberus Network",
+  "id": "xerberus",
+  "chainType": "Live",
   "bootNodes": [
-    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPzdHrEEpU2kMxqAxZ248wGCkRPg9Fx4wSq4gKrZFZwDL"
+    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWP7JW5SnW4pdmBGYtFb3c1isEEitzEuBCYAZWJbCN3PWp"
   ],
   "telemetryEndpoints": null,
-  "protocolId": null,
-  "properties": null,
+  "protocolId": "xerberus",
+  "properties": {
+    "ss58Format": 42,
+    "tokenDecimals": 12,
+    "tokenSymbol": "XER"
+  },
   "codeSubstitutes": {},
   "genesis": {
     "raw": {
