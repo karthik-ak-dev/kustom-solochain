@@ -1,12 +1,32 @@
-Interact with the run time api directly:
+# =====================================================================================
+# SUBSTRATE RUNTIME API INTERACTION GUIDE
+# =====================================================================================
+# This guide shows how to interact directly with your chain's runtime API via RPC calls
+
+# --------------------------------------------------------------------------------------
+# INTRODUCTION
+# --------------------------------------------------------------------------------------
+# Runtime APIs allow you to call functions in your runtime directly through RPC.
+# The examples below use curl to make HTTP requests to a running node.
+# The format is: state_call + API_name + API_method + hex_encoded_parameters
+
+# --------------------------------------------------------------------------------------
+# BASIC RUNTIME API CALL EXAMPLE
+# --------------------------------------------------------------------------------------
+# This example calls the "say_hello" method from the "RiskRatingApi"
+# The "0x" parameter is an empty scale-encoded parameter
 curl -s -H "Content-Type: application/json" -d '{
   "jsonrpc": "2.0",
   "id": 1,
   "method": "state_call",
   "params": ["RiskRatingApi_say_hello", "0x"]
-}' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | cut -c3- | xxd -r -p
+}' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | xxd -r -p
 
-
+# --------------------------------------------------------------------------------------
+# CALLING RUNTIME API WITH PARAMETERS
+# --------------------------------------------------------------------------------------
+# Example 1: Get asset with ID 0
+# The "0x00000000" parameter is the scale-encoded asset ID (0 in this case)
 curl -s -H "Content-Type: application/json" -d '{
   "jsonrpc": "2.0",
   "id": 1,
@@ -14,20 +34,46 @@ curl -s -H "Content-Type: application/json" -d '{
   "params": ["RiskRatingApi_get_asset", "0x00000000"]
 }' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | xxd -r -p
 
+# Example output:
+# {"id": 0, "name": "ff", "symbol": "ff", "description": "ff", "creator": "5GrwvaEF...", "createdAt": 8}
 
-curl -s -H "Content-Type: application/json" -d '{
-  "jsonrpc": "2.0",
-  "id": 1,
-  "method": "state_call",
-  "params": ["RiskRatingApi_get_asset", "0x00000000"]
-}' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | xxd -r -p
-
-?{"id": 0, "name": "ff", "symbol": "ff", "description": "ff", "creator": "5GrwvaEF...", "createdAt": 8}%    
-
+# --------------------------------------------------------------------------------------
+# RETRIEVING COLLECTIONS
+# --------------------------------------------------------------------------------------
+# This example retrieves all assets in the system
+# The "0x" parameter is an empty scale-encoded parameter
 curl -s -H "Content-Type: application/json" -d '{
   "jsonrpc": "2.0",
   "id": 1,
   "method": "state_call",
   "params": ["RiskRatingApi_get_all_assets", "0x"]
 }' http://127.0.0.1:9944 | jq -r .result | sed 's/^0x//' | xxd -r -p
-?[{"id": 0, "name": "ff", "symbol": "ff", "description": "ff", "creator": "5GrwvaEF...", "createdAt": 8}]%
+
+# Example output:
+# [{"id": 0, "name": "ff", "symbol": "ff", "description": "ff", "creator": "5GrwvaEF...", "createdAt": 8}]
+
+# --------------------------------------------------------------------------------------
+# UNDERSTANDING THE COMMAND PIPELINE
+# --------------------------------------------------------------------------------------
+# The curl commands above use some post-processing to make the results readable:
+# 1. curl -s           : Makes the request silently (no progress or error messages)
+# 2. jq -r .result     : Extracts just the "result" field from the JSON response
+# 3. sed 's/^0x//'     : Removes the leading "0x" from the hex string
+# 4. xxd -r -p         : Converts the hex string back to readable text
+
+# --------------------------------------------------------------------------------------
+# NOTES ABOUT PARAMETERS
+# --------------------------------------------------------------------------------------
+# - Parameters must be SCALE encoded in hex format.
+# - 0x00000000 = SCALE encoded 32-bit integer with value 0
+# - 0x = Empty parameter
+# - For complex types, you'll need a SCALE encoder/decoder library to prepare inputs.
+#   Polkadot.js offers utilities for this in JavaScript environments.
+
+# --------------------------------------------------------------------------------------
+# FURTHER EXAMPLES
+# --------------------------------------------------------------------------------------
+# To call your own custom runtime APIs, replace "RiskRatingApi_method_name" with
+# your API name and method, and provide the properly encoded parameters.
+# 
+# The format is always: YourApiName_your_method_name
