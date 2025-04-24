@@ -2,4 +2,5 @@
 
 target/
 
-local-chain-state/data/*
+local-chain-state/
+local-chain-state/*
