@@ -16,9 +16,10 @@ RUN useradd -m -u 1001 -U -s /bin/sh -d /polkadot polkadot && \
 	chown -R polkadot:polkadot /data && \
 	ln -s /data /polkadot/.local/share/polkadot && \
 # unclutter and minimize the attack surface
-	rm -rf /usr/bin /usr/sbin && \
-# check if executable works in this container
-	/usr/local/bin/solochain-template-node --version
+	rm -rf /usr/bin /usr/sbin
+
+# Copy the chain spec file after creating the user
+COPY --chown=polkadot:polkadot --chmod=774 chain-spec-raw.json /data/chain-spec-raw.json
 
 USER polkadot
 

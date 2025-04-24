@@ -12,7 +12,7 @@ services:
   xerberus-bootnode:
     container_name: "xerberus-bootnode"
     image: xerberus-node:latest
-    pull_policy: always
+    # pull_policy: always
     restart: unless-stopped
     command: |
       --base-path /data/nodes/xerberus-bootnode
@@ -36,18 +36,19 @@ services:
     environment:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
-      - ../chain-spec-raw.json:/data/chain-spec-raw.json:ro
       - xerberus_nodes_data:/data
     logging:
-      driver: journald
+      driver: json-file
       options:
+        max-size: "10m"
+        max-file: "3"
         env: "NODE=xerberus-bootnode"
         tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
 
   xerberus-validator-1:
     container_name: "xerberus-validator-1"
     image: xerberus-node:latest
-    pull_policy: always
+    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -75,18 +76,19 @@ services:
     environment:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
-      - ../chain-spec-raw.json:/data/chain-spec-raw.json:ro
       - xerberus_nodes_data:/data
     logging:
-      driver: journald
+      driver: json-file
       options:
+        max-size: "10m"
+        max-file: "3"
         env: "NODE=xerberus-validator-1"
         tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
 
   xerberus-validator-2:
     container_name: "xerberus-validator-2"
     image: xerberus-node:latest
-    pull_policy: always
+    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -114,18 +116,19 @@ services:
     environment:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
-      - ../chain-spec-raw.json:/data/chain-spec-raw.json:ro
       - xerberus_nodes_data:/data
     logging:
-      driver: journald
+      driver: json-file
       options:
+        max-size: "10m"
+        max-file: "3"
         env: "NODE=xerberus-validator-2"
         tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
 
   xerberus-validator-3:
     container_name: "xerberus-validator-3"
     image: xerberus-node:latest
-    pull_policy: always
+    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -153,18 +156,19 @@ services:
     environment:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
-      - ../chain-spec-raw.json:/data/chain-spec-raw.json:ro
       - xerberus_nodes_data:/data
     logging:
-      driver: journald
+      driver: json-file
       options:
+        max-size: "10m"
+        max-file: "3"
         env: "NODE=xerberus-validator-3"
         tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
 
   xerberus-lightnode:
     container_name: "xerberus-lightnode"
     image: xerberus-node:latest
-    pull_policy: always
+    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -191,11 +195,12 @@ services:
     environment:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
-      - ../chain-spec-raw.json:/data/chain-spec-raw.json:ro
       - xerberus_nodes_data:/data
     logging:
-      driver: journald
+      driver: json-file
       options:
+        max-size: "10m"
+        max-file: "3"
         env: "NODE=xerberus-lightnode"
         tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
 
