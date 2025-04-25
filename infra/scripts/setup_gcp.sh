@@ -19,7 +19,7 @@ fi
 PROJECT_ID="$1"
 USER_EMAIL="$2"
 CLOUDSDK_COMPUTE_REGION="${CLOUDSDK_COMPUTE_REGION:-europe-west2}"
-# TF_STATE_BUCKET="${TF_STATE_BUCKET:-tf-state-$PROJECT_ID}"
+# IMP Note: Directly testnet bucket's been configured
 TF_STATE_BUCKET="${TF_STATE_BUCKET:-testnet-v2-xerberus-tf-state}"
 
 set_project() {

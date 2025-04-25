@@ -110,6 +110,24 @@ resource "google_compute_backend_service" "rpc" {
   health_checks = [google_compute_health_check.rpc.self_link]
 }
 
+resource "google_compute_backend_service" "rpc-http" {
+  name        = "${local.prefix}-rpc-http-backend"
+  protocol    = "HTTP"
+  port_name   = "rpc"
+  timeout_sec = 1800 # 30 minutes, adjust as needed
+
+  connection_draining_timeout_sec = 300
+
+  load_balancing_scheme = "EXTERNAL"
+  session_affinity      = "CLIENT_IP"
+
+  backend {
+    group = google_compute_instance_group.multiple.self_link
+  }
+
+  health_checks = [google_compute_health_check.rpc.self_link]
+}
+
 resource "google_compute_backend_service" "p2p" {
   name        = "${local.prefix}-p2p-backend"
   protocol    = "TCP"

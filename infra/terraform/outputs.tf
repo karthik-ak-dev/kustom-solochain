@@ -65,7 +65,7 @@ output "iap_lightnode_scp_command" {
 
 output "os_login_enabled" {
   description = "Indicates whether OS Login is enabled"
-  value       = google_compute_project_metadata_item.os_login.value
+  value       = "TRUE" # Hardcoded since we're not managing this via Terraform, is already set on your GCP project
 }
 
 output "firewall_rule_name" {

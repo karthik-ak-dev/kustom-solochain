@@ -53,7 +53,7 @@ resource "google_compute_target_https_proxy" "https" {
 
 resource "google_compute_url_map" "https" {
   name            = "${local.prefix}-url-map"
-  default_service = google_compute_backend_service.rpc.self_link
+  default_service = google_compute_backend_service.rpc-http.self_link
 }
 
 resource "google_compute_managed_ssl_certificate" "ssl_cert" {

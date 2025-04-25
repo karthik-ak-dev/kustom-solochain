@@ -4,3 +4,20 @@ target/
 
 local-chain-state/
 local-chain-state/*
+
+# Terraform specific ignores
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*tfplan*
+
+# Ignore override files as they're usually environment-specific
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Keep the lock file in version control
+!.terraform.lock.hcl
