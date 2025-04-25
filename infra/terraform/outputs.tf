@@ -84,9 +84,9 @@ output "polkadot_lightnode_public_ips" {
 }
 
 output "load_balancer_ip" {
-  value = google_compute_global_address.jsonrpc.address
+  value = google_compute_global_address.rpc.address
 }
 
-output "jsonrpc_url" {
-  value = "wss://${google_compute_managed_ssl_certificate.jsonrpc.managed[0].domains[0]}"
+output "rpc_url" {
+  value = "wss://${google_compute_managed_ssl_certificate.ssl_cert.managed[0].domains[0]}"
 }

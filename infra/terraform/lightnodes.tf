@@ -11,7 +11,7 @@ resource "google_compute_instance" "lightnodes" {
   count = local.number_of_lightnodes
 
   name         = "${local.compute_name}-lightnode-${count.index}"
-  machine_type = local.machine_type
+  machine_type = local.lightnode_machine_type
   zone         = local.zone
 
   boot_disk {

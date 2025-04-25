@@ -20,7 +20,7 @@ resource "google_iap_tunnel_instance_iam_binding" "instance_iam" {
 
   depends_on = [
     google_project_service.iap,
-    google_compute_instance.multiple[0]
+    google_compute_instance.multiple
   ]
 }
 
