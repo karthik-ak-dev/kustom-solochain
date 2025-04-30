@@ -48,14 +48,14 @@ output "iap_tunnel_command" {
   value       = "gcloud compute ssh --zone ${local.zone} ${google_compute_instance.multiple[0].name} --tunnel-through-iap --project ${local.project_id}"
 }
 
-output "iap_scp_command" {
-  description = "Command to SCP Ansible into the instance using IAP tunneling"
-  value       = "gcloud compute scp --compress --zone ${local.zone} --tunnel-through-iap --project ${local.project_id} --recurse ./ansible ${google_compute_instance.multiple[0].name}:~/ansible"
-}
-
 output "iap_lightnode_tunnel_command" {
   description = "Command to SSH into the lightnode instance using IAP tunneling"
   value       = "gcloud compute ssh --zone ${local.zone} ${google_compute_instance.lightnodes[0].name} --tunnel-through-iap --project ${local.project_id}"
+}
+
+output "iap_scp_command" {
+  description = "Command to SCP Ansible into the instance using IAP tunneling"
+  value       = "gcloud compute scp --compress --zone ${local.zone} --tunnel-through-iap --project ${local.project_id} --recurse ./ansible ${google_compute_instance.multiple[0].name}:~/ansible"
 }
 
 output "iap_lightnode_scp_command" {
@@ -89,4 +89,14 @@ output "load_balancer_ip" {
 
 output "rpc_url" {
   value = "wss://${google_compute_managed_ssl_certificate.ssl_cert.managed[0].domains[0]}"
+}
+
+output "scripts_scp_command" {
+  description = "Command to SCP scripts directory into the instance using IAP tunneling"
+  value       = "gcloud compute scp --compress --zone ${local.zone} --tunnel-through-iap --project ${local.project_id} --recurse ../scripts ${google_compute_instance.multiple[0].name}:~/scripts"
+}
+
+output "lightnode_scripts_scp_command" {
+  description = "Command to SCP scripts directory into the lightnode instance using IAP tunneling"
+  value       = "gcloud compute scp --compress --zone ${local.zone} --tunnel-through-iap --project ${local.project_id} --recurse ../scripts ${google_compute_instance.lightnodes[0].name}:~/scripts"
 }
