@@ -3,7 +3,12 @@
   "id": "xerberus",
   "chainType": "Live",
   "bootNodes": [
-    "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri"
+    "/dns/node-v2.xerberus.io/tcp/443/wss/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t",
+    "/dns/node-v2.xerberus.io/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t",
+    "/dns/node-v2.xerberus.io/tcp/9933/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t",
+    "/ip4/34.147.135.93/tcp/443/wss/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t",
+    "/ip4/34.147.135.93/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t",
+    "/ip4/34.147.135.93/tcp/9933/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t"
   ],
   "telemetryEndpoints": null,
   "protocolId": "xerberus",

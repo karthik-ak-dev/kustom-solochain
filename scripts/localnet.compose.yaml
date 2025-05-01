@@ -207,6 +207,7 @@ services:
 # =======================================================================================
 # SETUP INSTRUCTIONS - Follow these steps in order
 # =======================================================================================
+# Use "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri" as the bootnode in chain-spec.json for localnet
 
 # STEP 1: Generate P2P keys for all nodes
 # ---------------------------------------
