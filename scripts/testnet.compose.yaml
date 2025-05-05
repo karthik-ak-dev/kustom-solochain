@@ -24,7 +24,7 @@ services:
       --port 30333
       --rpc-cors all
       --rpc-external
-      --rpc-methods Unsafe
+      --rpc-methods safe
       --prometheus-external
       --no-private-ip
     ports:
@@ -65,6 +65,7 @@ services:
       --port 30333
       --prometheus-external
       --offchain-worker always
+      --allow-private-ip
     ports:
       - "30334:30333"
       - "9934:9933"
@@ -101,6 +102,7 @@ services:
       --port 30333
       --prometheus-external
       --offchain-worker always
+      --allow-private-ip
     ports:
       - "30335:30333"
       - "9935:9933"
@@ -137,6 +139,7 @@ services:
       --port 30333
       --prometheus-external
       --offchain-worker always
+      --allow-private-ip
     ports:
       - "30336:30333"
       - "9936:9933"
