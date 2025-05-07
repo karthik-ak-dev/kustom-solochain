@@ -30,7 +30,7 @@ resource "google_compute_instance" "lightnodes" {
     startup-script = file("start-up-script.sh")
   }
 
-  tags = ["allow-iap-ssh", "allow-protocol", "allow-egress"]
+  tags = ["allow-iap-ssh", "allow-protocol", "http-server", "https-server", "allow-egress"]
 
   network_interface {
     # network = "default"
@@ -95,6 +95,24 @@ resource "google_compute_health_check" "lightnodes-rpc" {
 resource "google_compute_backend_service" "lightnodes-rpc" {
   name        = "${local.prefix}-lightnodes-rpc-backend"
   protocol    = "TCP"
+  port_name   = "rpc"
+  timeout_sec = 1800 # 30 minutes, adjust as needed
+
+  connection_draining_timeout_sec = 300
+
+  load_balancing_scheme = "EXTERNAL"
+  session_affinity      = "CLIENT_IP"
+
+  backend {
+    group = google_compute_instance_group.lightnodes.self_link
+  }
+
+  health_checks = [google_compute_health_check.lightnodes-rpc.self_link]
+}
+
+resource "google_compute_backend_service" "lightnodes-rpc-http" {
+  name        = "${local.prefix}-lightnodes-rpc-http-backend"
+  protocol    = "HTTP"
   port_name   = "rpc"
   timeout_sec = 1800 # 30 minutes, adjust as needed
 

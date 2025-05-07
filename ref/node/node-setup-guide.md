@@ -38,10 +38,10 @@ This section guides you through setting up a local testnet with multiple nodes i
 
 ### Step 1: Create Directory Structure
 
-First, set up the necessary directory structure for node data and keys:
+First, set up the necessary directory structure for node data:
 
 ```bash
-mkdir -p local-chain-state/{keys,data}/{bootnode,validator1,validator2,validator3,lightnode}
+mkdir -p local-chain-state/nodes/{xerberus-bootnode,xerberus-validator-1,xerberus-validator-2,xerberus-validator-3}
 ```
 
 ### Step 2: Generate Node Keys
