@@ -60,7 +60,7 @@ services:
       --rpc-cors all
       --name xerberus_validator_1
       --node-key e9d6a82a1c3b4e08bf8d925a069949a1316a3cc218119b9121d58179127186a1
-      --bootnodes /dns/node-v2.xerberus.io/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t
+      --bootnodes /dns/node-v2.xerberus.io/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t
       --rpc-port 9933
       --port 30333
       --prometheus-external
@@ -97,7 +97,7 @@ services:
       --rpc-cors all
       --name xerberus_validator_2
       --node-key 83d776b5237d8b860194963b7146368cbf36bacfbae3417b16acd0690329977d
-      --bootnodes /dns/node-v2.xerberus.io/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t
+      --bootnodes /dns/node-v2.xerberus.io/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t
       --rpc-port 9933
       --port 30333
       --prometheus-external
@@ -134,7 +134,7 @@ services:
       --rpc-cors all
       --name xerberus_validator_3
       --node-key 7c57477ab29ba4eb3953e0628735e7295eedd8b94e9e8c91a584244747060836
-      --bootnodes /dns/node-v2.xerberus.io/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t
+      --bootnodes /dns/node-v2.xerberus.io/tcp/30333/ws/p2p/12D3KooWCYKbsQw2r5575MA8YqMhn8AqhVuZkfobPMyoKzEP595t
       --rpc-port 9933
       --port 30333
       --prometheus-external
