@@ -12,14 +12,13 @@ services:
   xerberus-bootnode:
     container_name: "xerberus-bootnode"
     image: xerberus-node:latest
-    # pull_policy: always
     restart: unless-stopped
     command: |
       --base-path /data/nodes/xerberus-bootnode
       --chain /data/chain-spec-raw.json
       --name node_xerberus_io
       --node-key 1ec1cc5c72a2104f4933b6968d4d22cc286d278b11adbeabc416f14794e2884c
-      --public-addr /ip4/127.0.0.1/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
+      --public-addr /ip4/172.28.0.2/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
       --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
       --rpc-port 9933
       --port 30333
@@ -37,18 +36,13 @@ services:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
       - xerberus_nodes_data:/data
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-        env: "NODE=xerberus-bootnode"
-        tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+    networks:
+      customnet:
+        ipv4_address: 172.28.0.2
 
   xerberus-validator-1:
     container_name: "xerberus-validator-1"
     image: xerberus-node:latest
-    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -61,7 +55,7 @@ services:
       --rpc-cors all
       --name xerberus_validator_1
       --node-key e9d6a82a1c3b4e08bf8d925a069949a1316a3cc218119b9121d58179127186a1
-      --bootnodes /ip4/127.0.0.1/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
+      --bootnodes /ip4/172.28.0.2/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
       --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
       --rpc-port 9933
       --port 30333
@@ -77,18 +71,13 @@ services:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
       - xerberus_nodes_data:/data
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-        env: "NODE=xerberus-validator-1"
-        tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+    networks:
+      customnet:
+        ipv4_address: 172.28.0.3
 
   xerberus-validator-2:
     container_name: "xerberus-validator-2"
     image: xerberus-node:latest
-    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -101,7 +90,7 @@ services:
       --rpc-cors all
       --name xerberus_validator_2
       --node-key 83d776b5237d8b860194963b7146368cbf36bacfbae3417b16acd0690329977d
-      --bootnodes /ip4/127.0.0.1/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
+      --bootnodes /ip4/172.28.0.2/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
       --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
       --rpc-port 9933
       --port 30333
@@ -117,18 +106,13 @@ services:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
       - xerberus_nodes_data:/data
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-        env: "NODE=xerberus-validator-2"
-        tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+    networks:
+      customnet:
+        ipv4_address: 172.28.0.4
 
   xerberus-validator-3:
     container_name: "xerberus-validator-3"
     image: xerberus-node:latest
-    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -141,7 +125,7 @@ services:
       --rpc-cors all
       --name xerberus_validator_3
       --node-key 7c57477ab29ba4eb3953e0628735e7295eedd8b94e9e8c91a584244747060836
-      --bootnodes /ip4/127.0.0.1/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
+      --bootnodes /ip4/172.28.0.2/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
       --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
       --rpc-port 9933
       --port 30333
@@ -157,18 +141,13 @@ services:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
       - xerberus_nodes_data:/data
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-        env: "NODE=xerberus-validator-3"
-        tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+    networks:
+      customnet:
+        ipv4_address: 172.28.0.5
 
   xerberus-lightnode:
     container_name: "xerberus-lightnode"
     image: xerberus-node:latest
-    # pull_policy: always
     restart: unless-stopped
     depends_on:
       - xerberus-bootnode
@@ -177,7 +156,7 @@ services:
       --chain /data/chain-spec-raw.json
       --name xerberus_lightnode
       --node-key dd5d2d6150daca485f47af262b2bf71bd8d6264e8c8522225f2946759231ee58
-      --bootnodes /ip4/127.0.0.1/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
+      --bootnodes /ip4/172.28.0.2/tcp/30333/ws/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri
       --telemetry-url "wss://telemetry.polkadot.io/submit/ 0"
       --rpc-port 9933
       --port 30333
@@ -196,100 +175,14 @@ services:
       - RUST_LOG=afg=trace,grandpa=debug,libp2p=debug,sub-libp2p=debug,sync=debug
     volumes:
       - xerberus_nodes_data:/data
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
-        env: "NODE=xerberus-lightnode"
-        tag: '{{.ImageName}}|{{.Name}}|{{.ImageFullID}}|{{.FullID}}'
+    networks:
+      customnet:
+        ipv4_address: 172.28.0.6
 
-# =======================================================================================
-# SETUP INSTRUCTIONS - Follow these steps in order
-# =======================================================================================
-# Use "/ip4/127.0.0.1/tcp/30333/p2p/12D3KooWPQJkTNMGQrjE9wTgGV98Ss5QEViorpysieDSTqS9ipri" as the bootnode in chain-spec.json for localnet
-
-# STEP 1: Generate P2P keys for all nodes
-# ---------------------------------------
-# subkey generate-node-key > local-chain-state/keys/bootnode/node-key
-# subkey generate-node-key > local-chain-state/keys/validator1/node-key
-# subkey generate-node-key > local-chain-state/keys/validator2/node-key
-# subkey generate-node-key > local-chain-state/keys/validator3/node-key
-# subkey generate-node-key > local-chain-state/keys/lightnode/node-key
-
-# STEP 2: Generate Authority keys for validators
-# ----------------------------------------------
-# For each validator, you need to generate two types of keys:
-# - Aura keys (Sr25519 scheme): Used for block production
-# - GRANDPA keys (Ed25519 scheme): Used for block finalization
-#
-# Run these commands and save the output (mnemonic + public key):
-# subkey generate --scheme Sr25519
-# subkey generate --scheme Ed25519
-
-# STEP 3: Create and customize the chain specification
-# ---------------------------------------------------
-# Generate the initial chain spec:
-# ./target/release/solochain-template-node build-spec --chain local > chain-spec.json
-#
-# Edit chain-spec.json to add your validators' Aura and GRANDPA public keys
-#
-# Generate the raw chain spec:
-# ./target/release/solochain-template-node build-spec --chain chain-spec.json --raw > chain-spec-raw.json
-
-# STEP 4: Start the network
-# ------------------------
-# Launch all nodes:
-# docker compose -f scripts/localnet.compose.yaml up -d
-#
-# Stop all nodes:
-# docker compose -f scripts/localnet.compose.yaml down 
-
-# STEP 5: Insert validator keys via RPC
-# ------------------------------------
-# For each validator, you need to insert the Aura and GRANDPA keys:
-
-# Validator 1:
-# Aura Key:
-# curl -H "Content-Type: application/json" -d \
-# '{"id":1,"jsonrpc":"2.0","method":"author_insertKey","params":["aura","ginger decrease bargain member learn business patch royal jacket company swamp tide","0x72a4fde8aeeab2fd90d577b588418eb0e175ef3f7984c10e11f887a2a158f07c"]}' \
-# http://127.0.0.1:9934
-#
-# GRANDPA Key:
-# curl -H "Content-Type: application/json" -d \
-# '{"id":1,"jsonrpc":"2.0","method":"author_insertKey","params":["gran","park aerobic era zero sniff birth seven scorpion kite night axis name","0x4e558158a2afd092c7f655c2d63d210a36902ae76f7b124a44720f28063521c5"]}' \
-# http://127.0.0.1:9934
-
-# Validator 2:
-# Aura Key:
-# curl -H "Content-Type: application/json" -d \
-# '{"id":1,"jsonrpc":"2.0","method":"author_insertKey","params":["aura","picnic dawn day sausage grunt flash endorse child under chaos fuel scorpion","0x96411bf7a592e11b8b86059fa7b2dc683d07b2217c650481198221bfc6ca3152"]}' \
-# http://127.0.0.1:9935
-#
-# GRANDPA Key:
-# curl -H "Content-Type: application/json" -d \
-# '{"id":1,"jsonrpc":"2.0","method":"author_insertKey","params":["gran","basic inch decrease loyal always repair walnut minute carbon fashion addict bridge","0x7935ec050ad8b02d103bb0e7c30a60da0d93aa14baf119255f8c95a8310cb71f"]}' \
-# http://127.0.0.1:9935
-
-# Validator 3:
-# Aura Key:
-# curl -H "Content-Type: application/json" -d \
-# '{"id":1,"jsonrpc":"2.0","method":"author_insertKey","params":["aura","monster brother winter uncle produce verify wet stomach strategy design route rotate","0x045885cbad88ff2539e9371833ec3ca2bd114bfdfdd34c869798e32340c65727"]}' \
-# http://127.0.0.1:9936
-#
-# GRANDPA Key:
-# curl -H "Content-Type: application/json" -d \
-# '{"id":1,"jsonrpc":"2.0","method":"author_insertKey","params":["gran","luggage entry example old vivid addict swap skill electric chest drastic blouse","0x4b9667a0603960b40d17590c29ecc28bbc46614ba1246db45d2bd3b8b0852f5f"]}' \
-# http://127.0.0.1:9936
-
-# STEP 6: Connect to your network
-# ------------------------------
-# Access via Polkadot.js Apps:
-# https://polkadot.js.org/apps/?rpc=ws://127.0.0.1:9944
-# 
-# All WebSocket endpoints:
-# - Bootnode: ws://127.0.0.1:9944
-# - Validator1: ws://127.0.0.1:9945
-# - Validator2: ws://127.0.0.1:9946
-# - Validator3: ws://127.0.0.1:9947
-# - Lightnode: ws://127.0.0.1:9948
+networks:
+  customnet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+          gateway: 172.28.0.1
