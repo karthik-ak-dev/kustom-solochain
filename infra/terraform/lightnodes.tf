@@ -65,6 +65,8 @@ resource "google_compute_instance_group" "lightnodes" {
   zone        = local.zone
 
   instances = google_compute_instance.lightnodes[*].self_link
+  
+  depends_on = [google_compute_instance.lightnodes]
 
   named_port {
     name = "rpc"          # JSON-RPC (both HTTP and WebSocket)

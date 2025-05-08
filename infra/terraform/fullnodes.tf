@@ -65,6 +65,8 @@ resource "google_compute_instance_group" "multiple" {
   zone        = local.zone
 
   instances = google_compute_instance.multiple[*].self_link
+  
+  depends_on = [google_compute_instance.multiple]
 
   named_port {
     name = "rpc"          # JSON-RPC (both HTTP and WebSocket)
