@@ -27,7 +27,6 @@ services:
       --rpc-port 9933
       --port 30333
       --prometheus-external
-      --sync fast
       --no-private-ip
     ports:
       - "30333:30333"

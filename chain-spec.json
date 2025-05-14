@@ -31,9 +31,9 @@
       "patch": {
         "aura": {
           "authorities": [
-            "5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8",
-            "5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3",
-            "5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9"
+            "5H6YbnEgCPAmvVNpWGXo1qbC7vEP28GHsvAyZzcBKG7rxfZg",
+            "5G8tkD2M2NZZQxgihgWyYS9wX1Jh4Kuyk4KxRXDwnYiCKfxg",
+            "5EhXFven9RKcRjpJVziP8ZNZsqdzARLE3AMfLGxkZTKhG2L7"
           ]
         },
         "balances": {
@@ -43,59 +43,27 @@
               1152921504606846976
             ],
             [
-              "5FHneW46xGXgs5mUiveU4sbTyGBzmstUspZC92UhjJM694ty",
+              "5H6YbnEgCPAmvVNpWGXo1qbC7vEP28GHsvAyZzcBKG7rxfZg",
               1152921504606846976
             ],
             [
-              "5FLSigC9HGRKVhB9FiEo4Y3koPsNmBmLJbpXg2mp1hXcS59Y",
+              "5G8tkD2M2NZZQxgihgWyYS9wX1Jh4Kuyk4KxRXDwnYiCKfxg",
               1152921504606846976
             ],
             [
-              "5DAAnrj7VHTznn2AWBemMuyBwZWs6FNFjdyVXUeYum3PTXFy",
+              "5EhXFven9RKcRjpJVziP8ZNZsqdzARLE3AMfLGxkZTKhG2L7",
               1152921504606846976
             ],
             [
-              "5HGjWAeFDfFCWPsjFQdVV2Msvz2XtMktvgocEZcCj68kUMaw",
+              "5Hd2vGBRbJiphJEGig2BNi2RcLnddyUGHBXtQq9HANReUzvh",
               1152921504606846976
             ],
             [
-              "5CiPPseXPECbkjWCa6MnjNokrgYjMqmKndv2rSnekmSK2DjL",
+              "5EGE9WDq4TucU1mvPzHgrYG2zTMKk6zAtFJd5TQwpjiNMg9c",
               1152921504606846976
             ],
             [
-              "5GNJqTPyNqANBkUVMN1LPPrxXnFouWXoe2wNSmmEoLctxiZY",
-              1152921504606846976
-            ],
-            [
-              "5HpG9w8EBLe5XCrbczpwq5TSXvedjrBGCwqxK1iQ7qUsSWFc",
-              1152921504606846976
-            ],
-            [
-              "5Ck5SLSHYac6WFt5UZRSsdJjwmpSZq85fd5TRNAdZQVzEAPT",
-              1152921504606846976
-            ],
-            [
-              "5HKPmK9GYtE1PSLsS1qiYU9xQ9Si1NcEhdeCq9sw5bqu4ns8",
-              1152921504606846976
-            ],
-            [
-              "5FCfAonRZgTFrTd9HREEyeJjDpT397KMzizE6T3DvebLFE7n",
-              1152921504606846976
-            ],
-            [
-              "5CRmqmsiNFExV6VbdmPJViVxrWmkaXXvBrSX8oqBT8R9vmWk",
-              1152921504606846976
-            ],
-            [
-              "5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8",
-              1152921504606846976
-            ],
-            [
-              "5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3",
-              1152921504606846976
-            ],
-            [
-              "5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9",
+              "5ChJgHsHsS9L1CnmGmoTugKgoyPJ2TevALjY1wQSxMEpQG8B",
               1152921504606846976
             ]
           ]
@@ -103,16 +71,16 @@
         "grandpa": {
           "authorities": [
             [
-                "5DqQzX96dG7ycueJxapQKXbJjhHneWF7imkykbMUc3EDQyEe",
-                1
+              "5Hd2vGBRbJiphJEGig2BNi2RcLnddyUGHBXtQq9HANReUzvh",
+              1
             ],
             [
-                "5Eodfn2ntEUCttJgKQfBrLcvbXBYx9eiVmiLtevV4zterNar",
-                1
+              "5EGE9WDq4TucU1mvPzHgrYG2zTMKk6zAtFJd5TQwpjiNMg9c",
+              1
             ],
             [
-                "5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT",
-                1
+              "5ChJgHsHsS9L1CnmGmoTugKgoyPJ2TevALjY1wQSxMEpQG8B",
+              1
             ]
           ]
         },

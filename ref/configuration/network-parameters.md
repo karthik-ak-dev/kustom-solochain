@@ -24,37 +24,37 @@ Aura keys use the Sr25519 cryptographic scheme and are used for block production
 #### Validator 1 - Aura
 
 ```
-Secret phrase:     ginger decrease bargain member learn business patch royal jacket company swamp tide
-Network ID:        substrate
-Secret seed:       0x6e03e61932a598054289f9ba7ede26069c097251deff71b5a41b49d23ac096c1
-Public key (hex):  0x72a4fde8aeeab2fd90d577b588418eb0e175ef3f7984c10e11f887a2a158f07c
-Account ID:        0x72a4fde8aeeab2fd90d577b588418eb0e175ef3f7984c10e11f887a2a158f07c
-Public key (SS58): 5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8
-SS58 Address:      5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8
+"accountId": "0xde947f4d9e0569e189f173c2cc9e85ac3dcc14c60e9cd6f3e254158efd45da0e",
+"networkId": "substrate",
+"publicKey": "0xde947f4d9e0569e189f173c2cc9e85ac3dcc14c60e9cd6f3e254158efd45da0e",
+"secretPhrase": "candy cushion purse birth hint hero lens frown intact hope gesture toe",
+"secretSeed": "0xd68bf4c12328ce388c2dff3fa192c33495e6ca72a06ddc654042a920aef361af",
+"ss58Address": "5H6YbnEgCPAmvVNpWGXo1qbC7vEP28GHsvAyZzcBKG7rxfZg",
+"ss58PublicKey": "5H6YbnEgCPAmvVNpWGXo1qbC7vEP28GHsvAyZzcBKG7rxfZg"
 ```
 
 #### Validator 2 - Aura
 
 ```
-Secret phrase:     picnic dawn day sausage grunt flash endorse child under chaos fuel scorpion
-Network ID:        substrate
-Secret seed:       0xb50e989e5fa2e1a6d802a979a31d74c77dcfd8a364e7855379254d6030234f32
-Public key (hex):  0x96411bf7a592e11b8b86059fa7b2dc683d07b2217c650481198221bfc6ca3152
-Account ID:        0x96411bf7a592e11b8b86059fa7b2dc683d07b2217c650481198221bfc6ca3152
-Public key (SS58): 5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3
-SS58 Address:      5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3
+"accountId": "0xb42291db975f6ac6758771400c5ecbc2cd151ddb293de6cead5908b303079d23",
+"networkId": "substrate",
+"publicKey": "0xb42291db975f6ac6758771400c5ecbc2cd151ddb293de6cead5908b303079d23",
+"secretPhrase": "family stuff wreck snow lazy cannon used liar balcony solid crop pencil",
+"secretSeed": "0x94ccd10a6bb3983276b9a352bb16da446dea364c4759c3c8d250abe21cdd36aa",
+"ss58Address": "5G8tkD2M2NZZQxgihgWyYS9wX1Jh4Kuyk4KxRXDwnYiCKfxg",
+"ss58PublicKey": "5G8tkD2M2NZZQxgihgWyYS9wX1Jh4Kuyk4KxRXDwnYiCKfxg"
 ```
 
 #### Validator 3 - Aura
 
 ```
-Secret phrase:     monster brother winter uncle produce verify wet stomach strategy design route rotate
-Network ID:        substrate
-Secret seed:       0x9363bd9bf76ddaf97b4759a46466ed8f53175c4df441d2a97878dae9f8b6b7d7
-Public key (hex):  0x045885cbad88ff2539e9371833ec3ca2bd114bfdfdd34c869798e32340c65727
-Account ID:        0x045885cbad88ff2539e9371833ec3ca2bd114bfdfdd34c869798e32340c65727
-Public key (SS58): 5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9
-SS58 Address:      5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9
+"accountId": "0x748cde0debf353773f6a7746f80be59e1ec85174cba9099a87eaca98f84d1505",
+"networkId": "substrate",
+"publicKey": "0x748cde0debf353773f6a7746f80be59e1ec85174cba9099a87eaca98f84d1505",
+"secretPhrase": "essence adjust east all nuclear crowd before much tenant frog table sick",
+"secretSeed": "0x22851646154d9e853be3b401df17fe1f682bbd41e60c7d049822c18167f38cc7",
+"ss58Address": "5EhXFven9RKcRjpJVziP8ZNZsqdzARLE3AMfLGxkZTKhG2L7",
+"ss58PublicKey": "5EhXFven9RKcRjpJVziP8ZNZsqdzARLE3AMfLGxkZTKhG2L7"
 ```
 
 ### Grandpa Keys (Block Finalization)
@@ -64,37 +64,37 @@ Grandpa keys use the Ed25519 cryptographic scheme and are used for block finaliz
 #### Validator 1 - Grandpa
 
 ```
-Secret phrase:     park aerobic era zero sniff birth seven scorpion kite night axis name
-Network ID:        substrate
-Secret seed:       0x0982116baf14c51457170b83156745d91f4de17d80348baf154f8b18b24d7f79
-Public key (hex):  0x4e558158a2afd092c7f655c2d63d210a36902ae76f7b124a44720f28063521c5
-Account ID:        0x4e558158a2afd092c7f655c2d63d210a36902ae76f7b124a44720f28063521c5
-Public key (SS58): 5DqQzX96dG7ycueJxapQKXbJjhHneWF7imkykbMUc3EDQyEe
-SS58 Address:      5DqQzX96dG7ycueJxapQKXbJjhHneWF7imkykbMUc3EDQyEe
+"accountId": "0xf5d53040be5faccea4e810727e4052c9ba9058b949a35f52e8a3c783603db516",
+"networkId": "substrate",
+"publicKey": "0xf5d53040be5faccea4e810727e4052c9ba9058b949a35f52e8a3c783603db516",
+"secretPhrase": "field shed clown easy junk jeans before already time actual chimney relax",
+"secretSeed": "0x4a4ed8696c52b1eb4289c9e3f60f546c4be05e6894ad687cdf4070cd2fa65d11",
+"ss58Address": "5Hd2vGBRbJiphJEGig2BNi2RcLnddyUGHBXtQq9HANReUzvh",
+"ss58PublicKey": "5Hd2vGBRbJiphJEGig2BNi2RcLnddyUGHBXtQq9HANReUzvh"
 ```
 
 #### Validator 2 - Grandpa
 
 ```
-Secret phrase:     basic inch decrease loyal always repair walnut minute carbon fashion addict bridge
-Network ID:        substrate
-Secret seed:       0x84cd27c47fa2bba5cd8841492f5f33c3e8f3217fc15e0be3b74042c475e789da
-Public key (hex):  0x7935ec050ad8b02d103bb0e7c30a60da0d93aa14baf119255f8c95a8310cb71f
-Account ID:        0x7935ec050ad8b02d103bb0e7c30a60da0d93aa14baf119255f8c95a8310cb71f
-Public key (SS58): 5Eodfn2ntEUCttJgKQfBrLcvbXBYx9eiVmiLtevV4zterNar
-SS58 Address:      5Eodfn2ntEUCttJgKQfBrLcvbXBYx9eiVmiLtevV4zterNar
+"accountId": "0x614221ebd595c221f8395ccf5efd489d399cfb970f0cb7754bf02808d681c8d0",
+"networkId": "substrate",
+"publicKey": "0x614221ebd595c221f8395ccf5efd489d399cfb970f0cb7754bf02808d681c8d0",
+"secretPhrase": "view defense shoot open spin mammal dune item buffalo wool suit truly",
+"secretSeed": "0x82f3c316f961dfcdf531634a19341f035ea5d172e1a41383cae1d388c648c3db",
+"ss58Address": "5EGE9WDq4TucU1mvPzHgrYG2zTMKk6zAtFJd5TQwpjiNMg9c",
+"ss58PublicKey": "5EGE9WDq4TucU1mvPzHgrYG2zTMKk6zAtFJd5TQwpjiNMg9c"
 ```
 
 #### Validator 3 - Grandpa
 
 ```
-Secret phrase:     luggage entry example old vivid addict swap skill electric chest drastic blouse
-Network ID:        substrate
-Secret seed:       0x8fa47c31f0e19bee27c3180f1744611debe8cfeb1d0c7885db0034b14860f627
-Public key (hex):  0x4b9667a0603960b40d17590c29ecc28bbc46614ba1246db45d2bd3b8b0852f5f
-Account ID:        0x4b9667a0603960b40d17590c29ecc28bbc46614ba1246db45d2bd3b8b0852f5f
-Public key (SS58): 5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT
-SS58 Address:      5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT
+"accountId": "0x1bea0d82a952f7775985438e79aabf4f05db8c04a24e6328438a13c3f6e6ea23",
+"networkId": "substrate",
+"publicKey": "0x1bea0d82a952f7775985438e79aabf4f05db8c04a24e6328438a13c3f6e6ea23",
+"secretPhrase": "border guide list vanish draw true announce derive sort struggle eyebrow grow",
+"secretSeed": "0x6363d867eb45950e22ffb624706b4832227f326f9a6c7c1d23949d98b6c04a6e",
+"ss58Address": "5ChJgHsHsS9L1CnmGmoTugKgoyPJ2TevALjY1wQSxMEpQG8B",
+"ss58PublicKey": "5ChJgHsHsS9L1CnmGmoTugKgoyPJ2TevALjY1wQSxMEpQG8B"
 ```
 
 ## Chain Specification Configuration
@@ -106,11 +106,11 @@ When creating your chain specification (`chain-spec.json`), use the following fo
 ```json
 "aura": {
   "authorities": [
-    "5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8",
-    "5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3",
-    "5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9"
+    "5H6YbnEgCPAmvVNpWGXo1qbC7vEP28GHsvAyZzcBKG7rxfZg",
+    "5G8tkD2M2NZZQxgihgWyYS9wX1Jh4Kuyk4KxRXDwnYiCKfxg",
+    "5EhXFven9RKcRjpJVziP8ZNZsqdzARLE3AMfLGxkZTKhG2L7"
   ]
-}
+},
 ```
 
 ### Grandpa Authorities Configuration
@@ -118,11 +118,20 @@ When creating your chain specification (`chain-spec.json`), use the following fo
 ```json
 "grandpa": {
   "authorities": [
-    ["5DqQzX96dG7ycueJxapQKXbJjhHneWF7imkykbMUc3EDQyEe", 1],
-    ["5Eodfn2ntEUCttJgKQfBrLcvbXBYx9eiVmiLtevV4zterNar", 1],
-    ["5Dmp8P5PqRLsqVUZDF1HckPfRgwrcNeidtBZ3EEcjBHw3sfT", 1]
+    [
+      "5Hd2vGBRbJiphJEGig2BNi2RcLnddyUGHBXtQq9HANReUzvh",
+      1
+    ],
+    [
+      "5EGE9WDq4TucU1mvPzHgrYG2zTMKk6zAtFJd5TQwpjiNMg9c",
+      1
+    ],
+    [
+      "5ChJgHsHsS9L1CnmGmoTugKgoyPJ2TevALjY1wQSxMEpQG8B",
+      1
+    ]
   ]
-}
+},
 ```
 
 ### Balances Configuration
@@ -132,11 +141,36 @@ For initial token distribution (optional):
 ```json
 "balances": {
   "balances": [
-    ["5Ef2L2S2St68hZLkVx61HN3c75eD5Jdt23mSyZaDDygub9P8", 1152921504606846976],
-    ["5FTiP588D9TfkuLUeUMyBM5EQzVJdz9wyCD3reCoKRWkMcd3", 1152921504606846976],
-    ["5CAQLzERqAs2LCfs7CAioSSpCQ1QWjFqrGMLt6YBBPMeAeV9", 1152921504606846976]
+    [
+      "5GrwvaEF5zXb26Fz9rcQpDWS57CtERHpNehXCPcNoHGKutQY",
+      1152921504606846976
+    ],
+    [
+      "5H6YbnEgCPAmvVNpWGXo1qbC7vEP28GHsvAyZzcBKG7rxfZg",
+      1152921504606846976
+    ],
+    [
+      "5G8tkD2M2NZZQxgihgWyYS9wX1Jh4Kuyk4KxRXDwnYiCKfxg",
+      1152921504606846976
+    ],
+    [
+      "5EhXFven9RKcRjpJVziP8ZNZsqdzARLE3AMfLGxkZTKhG2L7",
+      1152921504606846976
+    ],
+    [
+      "5Hd2vGBRbJiphJEGig2BNi2RcLnddyUGHBXtQq9HANReUzvh",
+      1152921504606846976
+    ],
+    [
+      "5EGE9WDq4TucU1mvPzHgrYG2zTMKk6zAtFJd5TQwpjiNMg9c",
+      1152921504606846976
+    ],
+    [
+      "5ChJgHsHsS9L1CnmGmoTugKgoyPJ2TevALjY1wQSxMEpQG8B",
+      1152921504606846976
+    ]
   ]
-}
+},
 ```
 
 ## Usage Guidelines
