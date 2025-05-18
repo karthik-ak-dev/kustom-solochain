@@ -4,7 +4,8 @@ set -e
 
 CWD="$(cd "$(dirname "$0")"/.. && pwd)"
 PLATFORM="linux/amd64"
-NAMESPACE="xerberusteam"
+# NAMESPACE="xerberusteam"
+NAMESPACE="karthik-ak-dev"
 
 usage() {
     echo "Usage: $0 [options]"
